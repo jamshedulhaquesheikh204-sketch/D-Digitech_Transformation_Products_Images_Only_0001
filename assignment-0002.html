@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain On Me | Digitech Assignment 0002 - Junaid Ul Haque Sheikh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose-blush: #f5e6e8;
+            --rose-deep: #d4a5a5;
+            --rose-accent: #c48b9f;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --cream: #faf8f5;
+            --charcoal: #2d2d2d;
+            --soft-black: #1a1a1a;
+            --peach: #ffecd2;
+            --lavender: #e8e0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Elegant Cursor */
+        body {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%23c48b9f' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23c48b9f'/%3E%3C/svg%3E"), auto;
+        }
+
+        /* Floating Rose Petals Background */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(ellipse at 30% 30%, var(--rose-blush), var(--rose-deep));
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.4;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Header Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--peach) 50%, var(--lavender) 100%);
+            padding: 40px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .assignment-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: var(--soft-black);
+            color: var(--cream);
+            padding: 12px 28px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+            border-radius: 0;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeUp 1.2s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .brand-icon {
+            width: 60px;
+            height: auto;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--soft-black);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .brand-tagline {
+            font-size: 0.85rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--rose-accent);
+            font-weight: 300;
+        }
+
+        /* Main Product Showcase */
+        .product-showcase {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeUp 1.4s ease-out;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow:
+                0 50px 100px rgba(196, 139, 159, 0.25),
+                0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .product-image-wrapper:hover {
+            transform: scale(1.02) translateY(-10px);
+        }
+
+        .product-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--gold), var(--rose-accent), var(--gold-light));
+            z-index: -1;
+            border-radius: 22px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Discount Banner */
+        .discount-banner {
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--soft-black);
+            padding: 15px 40px 15px 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+            box-shadow: 4px 4px 20px rgba(201, 162, 39, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+
+        /* Assignment Info Section */
+        .info-section {
+            background: var(--soft-black);
+            color: var(--cream);
+            padding: 100px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to bottom, transparent, var(--soft-black));
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+
+        .info-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 0.2em;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 25px auto 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rose-accent), var(--gold));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+        }
+
+        .info-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--rose-accent);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--cream);
+            line-height: 1.4;
+        }
+
+        /* Prompt Section */
+        .prompt-section {
+            background: linear-gradient(180deg, var(--soft-black), #252525);
+            padding: 80px 20px;
+        }
+
+        .prompt-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--gold);
+            padding: 40px;
+            position: relative;
+        }
+
+        .prompt-label {
+            position: absolute;
+            top: -12px;
+            left: 40px;
+            background: #252525;
+            padding: 0 15px;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .prompt-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Result Section */
+        .result-section {
+            background: linear-gradient(135deg, var(--rose-blush), var(--peach), var(--lavender));
+            padding: 120px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .result-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            color: var(--soft-black);
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        .result-discount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold), #8B6914, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .result-subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--soft-black);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--cream);
+            letter-spacing: 0.3em;
+            margin-bottom: 40px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 18px 40px;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .contact-btn:hover::before {
+            left: 0;
+        }
+
+        .contact-btn:hover {
+            color: var(--soft-black);
+        }
+
+        .contact-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            margin-bottom: 20px;
+            letter-spacing: 0.2em;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--rose-accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--gold);
+        }
+
+        .footer-credit {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.1em;
+        }
+
+        .footer-credit a {
+            color: var(--rose-accent);
+            text-decoration: none;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .assignment-badge {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 30px;
+            }
+
+            .hero {
+                padding-top: 30px;
+            }
+
+            .product-showcase {
+                padding: 0 10px;
+            }
+
+            .discount-banner {
+                font-size: 1.3rem;
+                padding: 12px 30px 12px 20px;
+            }
+
+            .info-card {
+                padding: 25px 20px;
+            }
+
+            .prompt-box {
+                padding: 30px 25px;
+            }
+
+            .contact-btn {
+                padding: 15px 30px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Petals -->
+    <div class="petals-container" id="petals"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="assignment-badge">Assignment 0002</div>
+
+        <div class="brand-header">
+            <svg class="brand-icon" viewBox="0 0 50 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25 5 C25 5, 10 20, 10 35 C10 45, 17 55, 25 55 C33 55, 40 45, 40 35 C40 20, 25 5, 25 5Z" stroke="#c48b9f" stroke-width="2" fill="none"/>
+                <path d="M25 15 C25 15, 18 25, 18 33 C18 40, 21 45, 25 45 C29 45, 32 40, 32 33 C32 25, 25 15, 25 15Z" fill="#c48b9f" opacity="0.3"/>
+            </svg>
+            <h1 class="brand-name">Rain On Me</h1>
+            <p class="brand-tagline">Luxury Formal Perfumes</p>
+        </div>
+
+        <div class="product-showcase">
+            <div class="discount-banner">50% OFF</div>
+            <div class="product-image-wrapper">
+                <img src="Images/ideogram-v3.0_Make_ad_for_Facebook_using_photo_I_gave_you_company_Rain_On_Me_50_percent_discou-0.jpg" alt="Rain On Me Perfume - 50% Discount on Formal Perfumes" class="product-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Info Section -->
+    <section class="info-section">
+        <div class="info-container">
+            <h2 class="section-title reveal">Student Information</h2>
+            <div class="info-grid">
+                <div class="info-card reveal">
+                    <div class="info-label">Name</div>
+                    <div class="info-value">Junaid Ul Haque Sheikh</div>
+                </div>
+                <div class="info-card reveal">
+                    <div class="info-label">Student ID</div>
+                    <div class="info-value">10037</div>
+                </div>
+                <div class="info-card reveal">
+                    <div class="info-label">Instructor</div>
+                    <div class="info-value">Miss Farah Sadiq Khan</div>
+                </div>
+                <div class="info-card reveal">
+                    <div class="info-label">Course</div>
+                    <div class="info-value">Website Development in Python</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prompt Section -->
+    <section class="prompt-section">
+        <div class="prompt-box reveal">
+            <span class="prompt-label">Prompt Given to ChatGPT</span>
+            <p class="prompt-text">
+                "Make ad for Facebook using photo I gave you company Rain On Me 50% discount on formal perfumes add contact number 03359033554/03343046525 make images/videos both added also on it."
+            </p>
+        </div>
+    </section>
+
+    <!-- Result Section -->
+    <section class="result-section">
+        <h2 class="result-title reveal">Rain On Me</h2>
+        <div class="result-discount reveal">50% OFF</div>
+        <p class="result-subtitle reveal">On Formal Perfumes</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h3 class="contact-title reveal">Contact Us</h3>
+        <div class="contact-buttons">
+            <a href="tel:03359033554" class="contact-btn reveal">
+                <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                0335-9033554
+            </a>
+            <a href="tel:03343046525" class="contact-btn reveal">
+                <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                0334-3046525
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h4 class="footer-title">Digitech Transformation</h4>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Assignment 0001</a>
+                <a href="https://github.com/junaidulhaquesheikh208-jpg/D-Digitech_Transformation_Products_Images_Only_0001" target="_blank" class="footer-link">GitHub</a>
+            </div>
+            <p class="footer-credit">
+                &copy; 2026 | Created by <strong>Junaid Ul Haque Sheikh</strong> | ID: 10037
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Create falling petals
+        function createPetals() {
+            const container = document.getElementById('petals');
+            const petalCount = 15;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                petal.style.animationDelay = (Math.random() * 10) + 's';
+                petal.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+                container.appendChild(petal);
+            }
+        }
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createPetals();
+            revealOnScroll();
+        });
+
+        window.addEventListener('scroll', revealOnScroll);
+    </script>
+</body>
+</html>
