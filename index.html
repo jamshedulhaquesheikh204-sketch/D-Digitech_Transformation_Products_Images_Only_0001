@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitech Transformation Assignment - Junaid Ul Haque Sheikh</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+
+        /* Student Info Card */
+        .student-info {
+            background: linear-gradient(145deg, #e94560, #ff6b6b);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(233, 69, 96, 0.3);
+        }
+
+        .student-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-item span {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .info-item strong {
+            font-size: 1.1rem;
+        }
+
+        /* Assignment Section */
+        .assignment-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .assignment-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #feca57;
+        }
+
+        .prompt-box {
+            background: #1a1a2e;
+            border-left: 4px solid #e94560;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+            color: #a0e7a0;
+        }
+
+        /* Gallery */
+        .gallery {
+            margin-bottom: 40px;
+        }
+
+        .gallery h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #feca57;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .caption {
+            padding: 15px;
+            text-align: center;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+
+        /* Result Highlight */
+        .result-highlight {
+            background: linear-gradient(145deg, #0f3460, #16213e);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 2px solid #e94560;
+        }
+
+        .result-highlight h2 {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .result-highlight .discount {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #feca57, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-highlight p {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-top: 10px;
+        }
+
+        /* Contact */
+        .contact-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-box h3 {
+            color: #feca57;
+            margin-bottom: 15px;
+        }
+
+        .contact-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-numbers a {
+            background: linear-gradient(145deg, #25d366, #128c7e);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-numbers a:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .result-highlight .discount {
+                font-size: 2.5rem;
+            }
+
+            .gallery-item img,
+            .gallery-item video {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Digitech Transformation</h1>
+            <p>Assignment 0001 - AI Generated Advertisements</p>
+        </header>
+
+        <!-- Student Info -->
+        <div class="student-info">
+            <h2>Student Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span>Name</span>
+                    <strong>JUNAID UL HAQUE SHEIKH</strong>
+                </div>
+                <div class="info-item">
+                    <span>Student ID</span>
+                    <strong>10037</strong>
+                </div>
+                <div class="info-item">
+                    <span>Instructor</span>
+                    <strong>MISS FARAH SADIQ KHAN</strong>
+                </div>
+                <div class="info-item">
+                    <span>Course</span>
+                    <strong>Website Development in Python</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assignment Details -->
+        <div class="assignment-section">
+            <h2>Assignment Task</h2>
+            <div class="prompt-box">
+                <strong>Prompt Given to ChatGPT:</strong><br><br>
+                "Make ad for Facebook using photo I gave you company Rain On Me 50% discount on formal perfumes add contact number 03359033554/03343046525 make images/videos both added also on it."
+            </div>
+        </div>
+
+        <!-- Result Highlight -->
+        <div class="result-highlight">
+            <h2>Rain On Me</h2>
+            <div class="discount">50% OFF</div>
+            <p>ON FORMAL PERFUMES!</p>
+        </div>
+
+        <!-- Contact Box -->
+        <div class="contact-box">
+            <h3>Contact Us</h3>
+            <div class="contact-numbers">
+                <a href="tel:03359033554">0335-9033554</a>
+                <a href="tel:03343046525">0334-3046525</a>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="gallery">
+            <h2>Generated Advertisements</h2>
+            <div class="gallery-grid">
+                <!-- Rain On Me Ad -->
+                <div class="gallery-item">
+                    <img src="ideogram-v3.0_Make_ad_for_Facebook_using_photo_I_gave_you_company_Rain_On_Me_50_percent_discou-0.jpg" alt="Rain On Me Perfume Ad">
+                    <div class="caption">Rain On Me - Facebook Ad</div>
+                </div>
+
+                <!-- Pink Paradise Ad -->
+                <div class="gallery-item">
+                    <img src="ideogram-v3.0_Make_ad_for_Facebook_using_photo_I_gave_you_company_Pink_Paradise_50_percent_dis-0.jpg" alt="Pink Paradise Ad">
+                    <div class="caption">Pink Paradise - Facebook Ad</div>
+                </div>
+
+                <!-- Additional Images -->
+                <div class="gallery-item">
+                    <img src="Images/6fd1ac73-7f00-47c8-b28d-99a6f0fc82d4.png" alt="Generated Image 1">
+                    <div class="caption">AI Generated Design 1</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Images/63d72bd0-e784-4e17-800a-8956fad2994f.png" alt="Generated Image 2">
+                    <div class="caption">AI Generated Design 2</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Images/31782051-d8f7-4ce4-8f06-df886052d2cd.png" alt="Generated Image 3">
+                    <div class="caption">AI Generated Design 3</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Images/bef7c3eb-5319-4559-8aba-e2511e0be2e9.png" alt="Generated Image 4">
+                    <div class="caption">AI Generated Design 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Videos Section -->
+        <div class="gallery">
+            <h2>Video Advertisements</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="Videos/formal_dress_ad.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="caption">Formal Dress Ad Video</div>
+                </div>
+
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="Videos/formal_dress_ad_90sec.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="caption">Formal Dress Ad (90 Seconds)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Digitech Transformation Assignment &copy; 2025</p>
+            <p>Created by <strong>Junaid Ul Haque Sheikh</strong> | ID: 10037</p>
+            <p><a href="https://github.com/junaidulhaquesheikh208-jpg/D-Digitech_Transformation_Products_Images_Only_0001" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>
